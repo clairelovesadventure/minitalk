@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: your_username <your_email>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 00:00:00 by your_username     #+#    #+#             */
-/*   Updated: 2024/01/01 00:00:00 by your_username    ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft/libft.h"
 #include <signal.h>
 #include <unistd.h>
@@ -52,7 +40,6 @@ int	main(int argc, char **argv)
 
     if (argc != 3)
     {
-        ft_printf("Error: wrong number of arguments\n");
         ft_printf("Usage: ./client <server_pid> <message>\n");
         return (1);
     }
