@@ -3,25 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 18:36:06 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 17:00:10 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/18 15:37:24 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/05 19:09:39 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdio.h>
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t			count;
-	unsigned char	*pointer_copy;
+	size_t			i;
+	unsigned char	*p;
 
-	count = 0;
-	pointer_copy = (unsigned char *)s;
-	while (count < n)
+	i = 0;
+	p = s;
+	while (i < n)
 	{
-		pointer_copy[count++] = (unsigned char)c;
+		p[i] = (unsigned char)c;
+		i++;
 	}
-	return (pointer_copy);
+	return (s);
 }
+
+/*int	main(void)
+{
+	char	s[100];
+	s[99] = '\0';
+	memset(s, '1', 10);
+	printf("%s\n",s);
+	ft_memset(s, 33, 5);
+	printf("%s", s);
+	return (0);
+}*/
+
+/*int	main(void)
+{
+	char	str1[20] = "Hello world!";
+	ft_memcpy(&str1[2], &str1[1], 7);
+	return (0);
+}*/

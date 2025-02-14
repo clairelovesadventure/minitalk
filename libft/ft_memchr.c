@@ -3,41 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 15:56:03 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/13 12:15:56 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/24 15:29:20 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/07 23:50:14 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t			index;
-	unsigned char	*s_pointer;
+	unsigned const char	*ptr_s;
+	size_t				i;
 
-	index = 0;
-	s_pointer = (unsigned char *)s;
-	while (index < n)
+	i = 0;
+	ptr_s = s;
+	while (i < n)
 	{
-		if (s_pointer[index] == (unsigned char)c)
-			return (&s_pointer[index]);
-		index++;
+		if (ptr_s[i] == (unsigned char)c)
+			return ((void *)&ptr_s[i]);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
-// int	main(void)
-// {
-// 	char	c;
-// 	char	*s;
+/*
+Yes, that is correct. If you have a char *p that is pointing 
+to a string, then p[1] is the value of the second character
+ of the string that p is pointing to. And &p[1] is the address 
+ of that second character, not the address of the pointer p itself.
+Specifically:
+p is a pointer to a character, which means it holds the address of 
+the first character in a string. p[1] accesses the second character 
+in the string that p is pointing to, because array indexing starts at 0.
+&p[1] gives you the address of that second character, not the address of 
+the pointer p.*/
 
-// 	c = 'u';
-// 	s = "e\0uuuh ?";
-// 	printf("strchr returned %p\n", memchr(s, c, 10));
-// 	printf("ft_strchr returned %p\n", ft_memchr(s, c, 10));
-// 	printf("Théo Babac returned %s\n", s);
-// 	return (0);
-// }
+/*int	main(void)
+{
+	char s1[] = "Hallo!";
+	printf("%s", (char *)memchr(s1, 'a', 4));
+	char s2[] = "Hallo!";
+	printf("%s", (char *)ft_memchr(s2, 'a', 4));
+	return (0);
+}*/

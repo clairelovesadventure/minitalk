@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_intlen.c                                        :+:      :+:    :+:   */
+/*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 17:26:14 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/22 16:19:10 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/05/30 22:28:18 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/30 22:42:09 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_intlen(long n)
-{
-	int	count;
+#include "ft_printf.h"
 
-	count = 0;
-	if (n == 2147483648)
-		return (10);
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
-		n *= -1;
-		count++;
-	}
-	while (n > 0)
-	{
-		n /= 10;
-		count++;
-	}
-	return (count);
+int	print_u(int num)
+{
+	char	c;
+
+	c = (unsigned int)num + '0';
+	return (write(1, &c, 1));
 }

@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 12:16:32 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/14 15:32:40 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/03/24 21:58:18 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/07 21:56:51 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
+#include <stddef.h>
 
-size_t	ft_strlcat(char *dest, char *src, size_t size)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	size_t	i;
-	size_t	dest_size;
-	size_t	src_size;
-	size_t	total_size;
+	unsigned int	j;
+	unsigned int	i;
 
-	dest_size = 0;
-	src_size = 0;
-	while (dest[dest_size])
-		dest_size++;
-	while (src[src_size])
-		src_size++;
-	if (size == 0)
-		return (src_size);
-	if (size <= dest_size)
-		return (src_size + size);
-	total_size = src_size + dest_size;
-	i = 0;
-	while (src[i] && dest_size < size - 1)
+	i = ft_strlen(dest);
+	j = 0;
+	if (size < 1)
+		return (size + ft_strlen(src));
+	while (src[j] != '\0' && i + j < size - 1)
 	{
-		dest[dest_size] = src[i];
-		dest_size++;
-		i++;
+		dest[i + j] = src[j];
+		j++;
 	}
-	dest[dest_size] = '\0';
-	return (total_size);
+	dest[i + j] = '\0';
+	if (size <= i)
+		return (ft_strlen(src) + size);
+	else
+		return (i + ft_strlen(src));
 }
+
+/*int	main(void)
+{
+	char	dest[10] = "Hallo,";
+	char	src[] = "world!";
+	printf("%u", ft_strlcat(dest, src, sizeof(dest)));
+}*/

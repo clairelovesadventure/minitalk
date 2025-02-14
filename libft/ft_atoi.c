@@ -3,37 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 18:00:20 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/14 15:18:19 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/29 17:11:36 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/06 23:50:16 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 
+int	ft_isdigit(unsigned char c);
+
 int	ft_atoi(const char *str)
 {
-	int		i;
-	int		negative;
-	int		result;
+	int	multi;
+	int	convert;
 
-	i = 0;
-	negative = 1;
-	result = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
-		i++;
-	if (str[i] == '-')
-		negative *= -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	multi = 1;
+	convert = 0;
+	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		result = (result * 10) + (str[i] - '0');
-		i++;
+		if (*str == '-')
+		{
+			multi *= -1;
+			str++;
+		}
+		else if (*str == '+')
+			str++;
 	}
-	result *= negative;
-	return (result);
+	while (ft_isdigit(*str) == 1)
+	{
+		convert = convert * 10 + *str - 48;
+		str++;
+	}
+	return (convert * multi);
 }
+
+/*int	main(void)
+{
+	char	s[] = "\n524dgd";
+	printf("%d\n", atoi(s));
+	printf("%d", ft_atoi(s));
+	return (0);
+}*/

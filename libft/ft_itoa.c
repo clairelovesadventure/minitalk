@@ -3,82 +3,204 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 11:30:31 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/13 11:40:56 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/05/03 17:53:37 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/08 22:51:21 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdio.h>
+
 #include <stdlib.h>
 
-static int	get_digits(long int n)
+static int	ft_numlen(long n)
 {
-	int	count;
+	int	len;
 
-	count = 1;
-	while (n >= 10)
+	len = (n <= 0);
+	while (n)
 	{
 		n /= 10;
-		count++;
+		len++;
 	}
-	return (count);
+	return (len);
 }
-
-// static void	ft_rev_tab(char *tab, int size)
-// {
-// 	int		i;
-// 	char	*array;
-
-// 	i = 0;
-// 	array = malloc((size + 1) * sizeof(char));
-// 	if (!array)
-// 		return ;
-// 	while (i < size)
-// 	{
-// 		array[i] = *tab;
-// 		if (i != size - 1)
-// 			tab++;
-// 		i++;
-// 	}
-// 	i--;
-// 	tab -= (size - 1);
-// 	while (i >= 0)
-// 	{
-// 		*tab++ = array[i];
-// 		i--;
-// 	}
-// }
 
 char	*ft_itoa(int n)
 {
-	int			digit_count;
-	char		*result;
-	long int	n_copy;
+	char	*str;
+	long	nb;
+	int		len;
+	int		sign;
 
-	n_copy = n;
-	if (n_copy < 0)
-		n_copy *= -1;
-	digit_count = get_digits(n_copy);
+	nb = n;
+	sign = 0;
 	if (n < 0)
-		digit_count++;
-	result = malloc((digit_count + 1) * sizeof(char));
-	if (!result)
-		return (0);
-	result[digit_count--] = '\0';
-	while (digit_count >= 0)
+		sign = 1;
+	if (sign != 0)
+		nb = -(long)n;
+	len = ft_numlen(nb);
+	str = malloc(sizeof(char) * (len + sign + 1));
+	if (!str)
+		return (NULL);
+	str[len + sign] = '\0';
+	while (len--)
 	{
-		result[digit_count--] = (n_copy % 10) + '0';
-		n_copy /= 10;
+		str[len + sign] = nb % 10 + '0';
+		nb /= 10;
 	}
-	if (n < 0)
-		result[0] = '-';
-	return (result);
+	if (sign)
+		str[0] = '-';
+	return (str);
 }
 
-// int	main(void)
-// {
-// 	printf("%s\n", ft_itoa(-2147483648));
-// 	return (0);
-// }
+/* char	*ft_itoa(int nbr)
+{
+	int		i;
+	char	*str;
+	long	div;
+	int		is_negative;
+	long	n;
+
+	n = nbr;
+	i = 1;
+	is_negative = 0;
+	if (n < 0)
+	{
+		is_negative = 1;
+		n = -n;
+	}
+	div = n;
+	while (div > 9)
+	{
+		div /= 10;
+		i++;
+	}
+	str = (char *)malloc(i * sizeof(char) + is_negative + 1);
+	if (!str)
+		return (NULL);
+	str[i + is_negative] = '\0';
+	i--;
+	while (n >= 0 && i >= 0)
+	{
+		str[i + is_negative] = n % 10 + '0';
+		n /= 10;
+		i--;
+	}
+	if (is_negative)
+		str[0] = '-';
+	return (str);
+}
+ */
+/*int	main(void)
+{
+	int	i;char	*ft_itoa(int nbr)
+{
+	int		i;
+	char	*str;
+	long	div;
+	int		is_negative;
+	long	n;
+
+	n = nbr;
+	i = 1;
+	is_negative = 0;
+	if (n < 0)
+	{
+		is_negative = 1;
+		n = -n;
+	}
+	div = n;
+	while (div > 9)
+	{
+		div /= 10;
+		i++;
+	}
+	str = (char *)malloc(i * sizeof(char) + is_negative + 1);
+	if (!str)
+		return (NULL);
+	str[i + is_negative] = '\0';
+	i--;
+	while (n >= 0 && i >= 0)
+	{
+		str[i + is_negative] = n % 10 + '0';
+		n /= 10;
+		i--;
+	}char	*ft_itoa(int nbr)
+{
+	int		i;
+	char	*str;
+	long	div;
+	int		is_negative;
+	long	n;
+
+	n = nbr;
+	i = 1;
+	is_negative = 0;
+	if (n < 0)
+	{
+		is_negative = 1;
+		n = -n;
+	}
+	div = n;
+	while (div > 9)
+	{
+		div /= 10;
+		i++;
+	}
+	str = (char *)malloc(i * sizeof(char) + is_negative + 1);
+	if (!str)
+		return (NULL);
+	str[i + is_negative] = '\0';
+	i--;
+	while (n >= 0 && i >= 0)
+	{
+		str[i + is_negative] = n % 10 + '0';
+		n /= 10;
+		i--;
+	}
+	if (is_negative)
+	while (n >= 0 && i >= 0)
+	{
+		str[i + is_negative] = n % 10 + '0';
+		n /= 10;
+		i--;
+	}
+	if (is_negative)
+		str[0] = '-';
+	return (str);
+}
+	if (is_negative)	{
+		str[i + is_negative] = n % 10 + '0';
+		n /= 10;
+		i--;
+	}
+	if (is_negative)
+	while (n >= 0 && i >= 0)
+	{
+		str[i + is_negative] = n % 10 + '0';
+		n /= 10;
+		i--;
+	}
+	if (is_negative)
+		str[0] = '-';
+	return (str);
+}
+	if (is_negative)
+		str[0] = '-';
+	return (str);
+}
+		str[0] = '-';
+	return (str);
+}
+	if (is_negative)
+		str[0] = '-';
+	return (str);
+}
+
+	i = -123532;
+	printf("%s", ft_itoa(i));
+	return (0);
+}*/

@@ -3,42 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 16:34:23 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/11 16:39:01 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/26 23:42:42 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/08 23:16:29 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
+/* int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	const unsigned char	*tmp1;
+	const unsigned char	*tmp2;
+
+	tmp1 = (const unsigned char *)s1;
+	tmp2 = (const unsigned char *)s2;
+	if (!tmp1 && !tmp2)
+		return (0);	
+	while (*tmp1 == *tmp2 && n)
+	{
+		tmp1++;
+		tmp2++;
+		n--;
+	}
+	if (n == 0)
+		return (0);
+	return ((unsigned char)*tmp1 - (unsigned char)*tmp2);
+} */
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*s1_pointer;
-	unsigned char	*s2_pointer;
+	const unsigned char	*tmp1;
+	const unsigned char	*tmp2;
+	size_t				i;
 
+	tmp1 = (const unsigned char *)s1;
+	tmp2 = (const unsigned char *)s2;
 	i = 0;
-	s1_pointer = (unsigned char *)s1;
-	s2_pointer = (unsigned char *)s2;
 	while (i < n)
 	{
-		if (s1_pointer[i] != s2_pointer[i])
-			return (s1_pointer[i] - s2_pointer[i]);
+		if (tmp1[i] != tmp2[i])
+			return (tmp1[i] - tmp2[i]);
 		i++;
 	}
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	char	*s1;
-// 	char	*s2;
-
-// 	s1 = "\0euuh ?";
-// 	s2 = "\0euuh \0?";
-// 	printf("memcmp returned %d\n", memcmp(s1, s2, 10));
-// 	printf("ft_memcmp returned %d\n", ft_memcmp(s1, s2, 10));
-// 	return (0);
-// }
+/*int	main(void)
+{
+	char	s1[] = "abc";
+	char	s2[] = "abcd";
+	printf("%d", ft_memcmp(s1, s2, 4));
+	return (0);
+}*/

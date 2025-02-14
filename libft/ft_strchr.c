@@ -3,59 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 15:56:03 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/15 18:01:30 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/23 21:15:44 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/09 17:15:10 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdio.h>
-#include <string.h>
-
-// char	*ft_strchr(const char *s, int c)
-// {
-// 	int	index;
-
-// 	index = 0;
-// 	while (s[index])
-// 	{
-// 		if (s[index] == c)
-// 			return ((char *)&s[index]);
-// 		index++;
-// 	}
-// 	if (c == '\0')
-// 		return ((char *)&s[index]);
-// 	return (0);
-// }
 
 char	*ft_strchr(const char *s, int c)
 {
-	size_t			index;
-	unsigned char	*s_pointer;
-
-	index = 0;
-	s_pointer = (unsigned char *)s;
-	while (s_pointer[index])
+	while (*s)
 	{
-		if (s_pointer[index] == (unsigned char)c)
-			return ((char *)&s_pointer[index]);
-		index++;
+		if (*(unsigned char *)s == (unsigned char)c)
+			return ((char *)s);
+		s++;
 	}
-	if (c == '\0' || c == 1024)
-		return ((char *)&s_pointer[index]);
-	return (0);
+	if ((unsigned char)c == 0)
+	{
+		return ((char *)s);
+	}
+	return (NULL);
 }
 
-// int	main(void)
-// {
-// 	char	c;
-// 	char	*s;
-
-// 	c = 'u';
-// 	s = "euuuuuh ?";
-// 	printf("strchr returned %s\n", strchr("teste", 1024));
-// 	printf("ft_strchr returned %s\n", ft_strchr("teste", 1024));
-// 	printf("Théo Babac returned %s\n", s);
-// 	return (0);
-// }
+/* int	main(void)
+{
+	char	s[] = "Hallo, World!";
+	printf("%p", ft_strchr(s, 0));
+	return (0);
+} */

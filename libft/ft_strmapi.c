@@ -3,47 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 14:48:25 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/13 14:31:09 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/05/03 19:09:31 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/05 20:38:59 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
-// char	f(unsigned int i, char c)
-// {
-// 	return (i + '0');
-// }
-
+/* char apply_function(unsigned int index, char c) 
+{
+	printf("Index: %u, Character: %c\n", index, c);
+	return toupper(c);
+}
+ */
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		i;
+	size_t	len;
+	size_t	i;
 	char	*result;
 
-	if (!s || !f)
-		return (0);
 	i = 0;
-	while (s[i])
-		i++;
-	result = malloc((i + 1) * sizeof(char));
+	len = 0;
+	while (s[len])
+		len++;
+	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)
-		return (0);
-	i = 0;
-	while (s[i])
+		return (NULL);
+	while (i < len)
 	{
 		result[i] = f(i, s[i]);
 		i++;
 	}
-	result[i] = 0;
+	result[len] = '\0';
 	return (result);
 }
 
-// int	main(void)
-// {
-// 	char string[] = "bonjour";
-// 	printf("%s got turned into %s\n", string, ft_strmapi(string, f));
-// 	return (0);
-// }
+/* int main() {
+    char *my_string = "hello world";
+    char *new_string = ft_strmapi(my_string, apply_function);
+
+    printf("Original string: %s\n", my_string);
+    printf("New string: %s\n", new_string);
+
+    free(new_string);
+    return 0;
+} */

@@ -3,17 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 13:58:30 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 20:24:01 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/23 20:44:17 by shutan            #+#    #+#             */
+/*   Updated: 2024/04/23 20:44:19 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <ctype.h>
+#include <stdio.h>
 
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	else
-		return (c);
+	if ((c >= 'A') && (c <= 'Z'))
+	{
+		c += 32;
+	}
+	return (c);
 }
+
+/*int	main (void)
+{
+	printf("%c", tolower('5'));
+	printf("%c", ft_tolower('5'));
+	return(0);
+}*/

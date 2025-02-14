@@ -3,52 +3,40 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: your_username <your_email>                  +#+  +:+       +#+        #
+#    By: shutan <shutan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/01 00:00:00 by your_username     #+#    #+#             #
-#    Updated: 2024/01/01 00:00:00 by your_username    ###   ########.fr       #
+#    Created: 2025/02/13 16:52:53 by shutan         #+#    #+#              #
+#    Updated: 2025/02/13 16:52:58 by shutan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
-CLIENT = client
-SERVER = server
-
+NAME = client server
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-
-LIBFT_PATH = ./libft
-LIBFT = $(LIBFT_PATH)/libft.a
-
-SRCS_CLIENT = client.c
-SRCS_SERVER = server.c
-
-OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
-OBJS_SERVER = $(SRCS_SERVER:.c=.o)
+INCLUDES = -I./libft
+LIBFT = libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(CLIENT) $(SERVER)
-
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_PATH)
+	$(MAKE) -C libft
 
-$(CLIENT): $(OBJS_CLIENT) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS_CLIENT) $(LIBFT) -o $(CLIENT)
+client: client.o $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLUDES) client.o -L./libft -lft -o client
 
-$(SERVER): $(OBJS_SERVER) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS_SERVER) $(LIBFT) -o $(SERVER)
+server: server.o $(LIBFT)
+	$(CC) $(CFLAGS) server.o $(LIBFT) -o server
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS_CLIENT) $(OBJS_SERVER)
-	$(MAKE) -C $(LIBFT_PATH) clean
+	$(MAKE) -C libft clean
+	rm -f client.o server.o
 
 fclean: clean
-	rm -f $(CLIENT) $(SERVER)
-	$(MAKE) -C $(LIBFT_PATH) fclean
+	$(MAKE) -C libft fclean
+	rm -f client server
 
 re: fclean all
 

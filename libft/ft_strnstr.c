@@ -3,51 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 11:12:48 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 21:17:49 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/29 16:25:24 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/08 23:19:20 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
+#include <stddef.h>
+
+size_t	ft_strlen(const char *str);
+
+char	*strnstr(const char *big, const char *little, size_t len);
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int	i;
-	int	j;
+	size_t	m;
+	size_t	n;
 
-	if (little[0] == '\0' || (len == 0 && !big))
+	m = 0;
+	n = 0;
+	if (*little == '\0')
 		return ((char *)big);
-	i = 0;
-	while (big[i] != '\0' && (size_t)i < len)
+	if (little == NULL)
+		return (NULL);
+	if (big == NULL && len == 0)
+		return (NULL);
+	while (big[m] && m < len)
 	{
-		j = 0;
-		while (little[j] != '\0' && (size_t)i + j < len)
-		{
-			if (big[i + j] == little[j])
-			{
-				j++;
-			}
-			else
-				break ;
-		}
-		if (little[j] == '\0')
-		{
-			return ((char *)big + i);
-		}
-		i++;
+		n = 0;
+		while (big[m + n] == little[n] && little[n] && m + n < len)
+			n++;
+		if (little[n] == '\0')
+			return ((char *)&big[m]);
+		m++;
 	}
-	return (0);
+	return (NULL);
 }
 
-// int	main(void)
-// {
-// 	char	first[] = "Bonjour";
-// 	char	second[] = "jour";
-// 	int		limit = 10;
-// 	printf("strstr returned %s\n", strnstr(first, second, limit));
-// 	printf("ft_strstr returned %s\n", ft_strnstr(first, second, limit));
-// 	return (0);
-// }
+/*int	main(void)
+{
+	const char	s1[] = "Hello, World! Nice to meet you!";
+	const char	s2[] = "World";
+	const char	s3[] = "";
+	char	*res = ft_strnstr(s1, s2, 20);
+	printf("%s\n", res);
+	printf("%s", strnstr(s1, s3, 20));
+	return(0);
+}*/

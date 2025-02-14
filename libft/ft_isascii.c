@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 18:32:42 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 20:25:45 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/18 15:23:09 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/19 20:24:53 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctype.h>
+
 int	ft_isascii(int c)
 {
-	return (c >= 0 && c <= 127);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
+
+/*int	main(void)
+{
+	printf("%d\n", ft_isascii('\a'));
+	printf("%d", isascii('\a'));
+	return (0);
+}*/

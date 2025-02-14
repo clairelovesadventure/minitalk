@@ -3,47 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 15:07:31 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/13 14:30:06 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/05/03 22:16:11 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/03 22:21:43 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-static void	ft_putchar_fd(char c, int fd)
-{
-	if (!c || !fd)
-		return ;
-	write(fd, &c, 1);
-}
-
-static int	ft_strlen(char *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
-
-static void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s || !fd)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
-
 void	ft_putendl_fd(char *s, int fd)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	int	len;
+
+	len = 0;
+	while (s[len])
+	{
+		write(fd, &s[len], 1);
+		len++;
+	}
+	write(fd, "\n", 1);
 }
 
-// int	main(void)
-// {
-// 	ft_putendl_fd("Salut bg", 1);
-// 	return (0);
-// }
+/* int	main(void)
+{
+	char	s[] = "Hallo";
+
+	ft_putendl_fd(s, 1);
+	return (0);
+} */

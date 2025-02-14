@@ -3,80 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 13:30:01 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/19 16:02:03 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/30 23:25:43 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/19 22:07:00 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "libft.h"
 
-static int	strings_count(char const *str, char c)
+static int	ft_count_words(char const *s, char c)
 {
-	int	strings_count;
+	int	count;
+	int	in_word;
 
-	strings_count = 0;
-	while (*str)
+	count = 0;
+	in_word = 0;
+	while (*s)
 	{
-		if (*str != c)
+		if (*s != c && !in_word)
 		{
-			strings_count++;
-			while (*str && *str != c)
-				str++;
+			in_word = 1;
+			count++;
 		}
-		else
-			str++;
+		else if (*s == c)
+			in_word = 0;
+		s++;
 	}
-	return (strings_count);
+	return (count);
 }
 
-static int	string_length(char const *s, char c, int i)
+static void	ft_freeall(char **arr, int i)
 {
-	int	length;
-
-	length = 0;
-	while (s[i] != c && s[i])
+	while (i >= 0)
 	{
-		length++;
-		i++;
+		free(arr[i]);
+		i--;
 	}
-	return (length);
+	free(arr);
 }
 
-static void	free_all(char **result, int index)
+static char	**ft_populate_arr(char const *s, char c, char **arr, int count)
 {
-	while (index-- > 0)
-		free(result[index]);
-	free(result);
+	int	i;
+	int	len;
+	int	start;
+
+	i = 0;
+	while (*s && i < count)
+	{
+		while (*s == c)
+			s++;
+		start = (int)(s - (char *)s);
+		len = 0;
+		while (s[len] && s[len] != c)
+			len++;
+		arr[i] = ft_substr((char *)s, start, len);
+		if (!arr[i])
+		{
+			ft_freeall(arr, i - 1);
+			return (NULL);
+		}
+		i++;
+		s += len;
+	}
+	arr[i] = NULL;
+	return (arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		index;
-	char	**result;
-	int		result_index;
+	char	**arr;
+	int		count;
 
-	index = 0;
-	result_index = -1;
-	result = malloc((strings_count(s, c) + 1) * sizeof(char *));
-	if (!result)
-		return (0);
-	while (++result_index < strings_count(s, c))
-	{
-		while (s[index] == c)
-			index++;
-		result[result_index] = ft_substr(s, index, string_length(s, c, index));
-		if (!(result[result_index]))
-		{
-			free_all(result, result_index);
-			return (0);
-		}
-		index += string_length(s, c, index);
-	}
-	result[result_index] = 0;
-	return (result);
+	count = ft_count_words(s, c);
+	arr = malloc((count + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
+	return (ft_populate_arr(s, c, arr, count));
 }
+
+/* int	main(void)
+{
+	int		i;
+	char	**tmp;
+	char	s[] = "-aab---cdgewa---d-";
+
+	i = 0;
+	tmp = ft_split(s, '-');
+	while (tmp[i] != NULL) 
+	{
+		printf("%s\n", tmp[i]);
+		free(tmp[i]);
+		i++;
+	}
+	free(tmp);
+ 	return (0);
+} */

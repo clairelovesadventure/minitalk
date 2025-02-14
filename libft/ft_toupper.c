@@ -3,17 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 13:58:30 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 20:24:09 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/23 20:31:47 by shutan            #+#    #+#             */
+/*   Updated: 2024/04/26 22:19:34 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	else
-		return (c);
+	if ((c >= 'a') && (c <= 'z'))
+	{
+		c -= 32;
+	}
+	return (c);
 }
+
+/*int	main(void)
+{
+	printf("%c", toupper('x'));
+	printf("%c", ft_toupper('S'));
+	return (0);
+}*/

@@ -3,60 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 17:10:28 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/13 12:25:49 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/30 22:07:49 by shutan            #+#    #+#             */
+/*   Updated: 2024/04/30 23:24:46 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-static int	ft_strlen(char const *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
+size_t	ft_strlen(char *str);
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*join;
-	int		i;
-	int		j;
+	size_t	count1;
+	size_t	count2;
+	size_t	i;
+	char	*tmp;
 
-	if (!s1 || !s2)
-		return (0);
-	join = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!join)
-		return (0);
 	i = 0;
-	j = 0;
-	while (s1[i])
+	count1 = ft_strlen((char *)s1);
+	count2 = ft_strlen((char *)s2);
+	tmp = (char *)malloc(sizeof(char) * (count1 + count2) + 1);
+	if (!tmp)
+		return (NULL);
+	while (i < count1)
 	{
-		join[i] = s1[i];
+		tmp[i] = s1[i];
 		i++;
 	}
-	while (s2[j])
+	i = 0;
+	while (i < count2)
 	{
-		join[i] = s2[j];
+		tmp[count1 + i] = s2[i];
 		i++;
-		j++;
 	}
-	join[i] = '\0';
-	return (join);
+	tmp[count1 + i] = '\0';
+	return (tmp);
 }
 
-// int	main(void)
-// {
-// 	char *s1 = "where is my ";
-// 	char *s2 = "malloc ???";
-
-// 	char *res = ft_strjoin(s2, s1);
-// 	printf("Output is %s\n", res);
-// 	return (0);
-// }
+/*int	main(void)
+{
+	char const s1[] = "Hello, ";
+	char const s2[] = "World";
+	printf("%s", ft_strjoin(s1, s2));
+	return (0);
+}*/

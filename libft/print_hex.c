@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <marvin@42.fr>                      +#+  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 13:18:39 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/13 13:28:10 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/01/01 00:00:00 by shutan            #+#    #+#             */
+/*   Updated: 2024/01/01 00:00:00 by shutan           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	print_hex(unsigned int num, char format)
 {
 	int		count;
-	t_list	*current;
+	char	*hex;
 
-	if (!lst)
-		return (0);
-	count = 1;
-	current = lst;
-	while (current->next)
-	{
-		count++;
-		current = current->next;
-	}
+	count = 0;
+	if (num == 0)
+		return (write(1, "0", 1));
+	if (format == 'x')
+		hex = "0123456789abcdef";
+	else
+		hex = "0123456789ABCDEF";
+	if (num >= 16)
+		count += print_hex(num / 16, format);
+	count += write(1, &hex[num % 16], 1);
 	return (count);
 }

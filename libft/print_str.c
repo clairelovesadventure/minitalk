@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 12:54:07 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/06/09 13:46:43 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/05/30 19:44:22 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/30 22:39:50 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_print_pointer(unsigned long long p, t_flags *flags)
+size_t	ft_strlen(const char *str)
 {
-	int	count;
+	size_t	i;
 
-	count = 0;
-	flags->hash = 0;
-	count += ft_print_string("0x");
-	count += ft_print_hexa(p, 'x', flags);
-	return (count);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+int	print_str(char *str)
+{
+	if (str == NULL)
+		return (write(1, "(null)", 6));
+	return (write(1, str, ft_strlen(str)));
 }

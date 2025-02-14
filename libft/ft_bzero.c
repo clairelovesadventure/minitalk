@@ -3,26 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 18:56:52 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 19:44:33 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/18 17:27:51 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/05 19:10:41 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t			count;
-	unsigned char	*pointer_copy;
+	size_t			i;
+	unsigned char	*p;
 
-	count = 0;
-	pointer_copy = (unsigned char *)s;
-	if (n == 0)
-		return ;
-	while (count < n)
+	i = 0;
+	p = s;
+	while (i < n)
 	{
-		pointer_copy[count++] = (unsigned char) '\0';
+		p[i] = '\0';
+		i++;
 	}
 }
+
+/*int	main(void)
+{
+	char	s[100] = "Helloooooooo";
+	printf("%s\n", s);
+	bzero(&s[5], 1);
+	printf("%s\n", s);
+	printf("%s\n", &s[6]);// so interesting that i can do this!
+	char	m[100] = "Helloooooooo";
+	printf("%s\n", m);
+	bzero(&m[5], 1);
+	printf("%s\n", m);
+	printf("%s", &m[6]);
+	return (0);
+}*/

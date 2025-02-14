@@ -3,30 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 18:59:19 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 19:49:08 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/18 18:03:59 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/08 22:59:19 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t			count;
-	unsigned char	*dest_copy;
-	unsigned char	*src_copy;
+	size_t				i;
+	unsigned char		*p;
+	const unsigned char	*s;
 
 	if (!dest && !src)
-		return (0);
-	count = 0;
-	dest_copy = (unsigned char *)dest;
-	src_copy = (unsigned char *)src;
-	while (count < n)
+		return (dest);
+	i = 0;
+	p = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	while (i < n)
 	{
-		dest_copy[count] = (unsigned char)src_copy[count];
-		count++;
+		p[i] = s[i];
+		i++;
 	}
 	return (dest);
 }
+/* 
+int	main(void)
+{
+	char	dest[] = "abcde";
+	char	src[] = "12345";
+	memcpy(&dest[3], &src[2], 1);
+	char	dest2[] = "abcde";
+	char	src2[] = "12345";
+	ft_memcpy(&dest2[3], &src2[2], 2);
+	int	arr1[] = {1, 2, 3, 4, 5};
+	int	arr2[] = {6, 7, 8, 9, 10};
+	memcpy(&arr1[1], &arr2[2], 8);
+	printf("%s\n", dest);
+	printf("%s\n", dest2);
+	int	i;
+
+	i = 0;
+	while (i < 5)
+	{
+		printf("%d", arr1[i]);
+		i++;
+	}
+	return (0);
+}
+ */

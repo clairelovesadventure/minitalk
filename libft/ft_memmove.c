@@ -3,47 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: shutan <shutan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 19:08:04 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/12 21:15:21 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/04/18 20:30:05 by shutan            #+#    #+#             */
+/*   Updated: 2024/05/08 23:33:41 by shutan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdio.h>
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t			i;
-	unsigned char	*src_pointer;
-	unsigned char	*dest_pointer;
+	char		*d;
+	const char	*s;
 
-	if (src == NULL && dest == NULL)
-		return (0);
-	i = 0;
-	src_pointer = (unsigned char *)src;
-	dest_pointer = (unsigned char *)dest;
-	if (dest_pointer > src_pointer)
-		while (n-- != 0)
-			dest_pointer[n] = src_pointer[n];
+	if (!dest && !src)
+		return (dest);
+	d = (char *)dest;
+	s = (const char *)src;
+	if (d < s)
+		while (n--)
+			*d++ = *s++;
 	else
 	{
-		while (i < n)
-		{
-			dest_pointer[i] = src_pointer[i];
-			i++;
-		}
+		d += n;
+		s += n;
+		while (n--)
+			*--d = *--s;
 	}
 	return (dest);
 }
 
-// int	main(void)
-// {
-// 	char	str[] = "Start stop";
+//this main function below to test the difference between memcpy and memmove
 
-// 	printf("The string: %s\n", str);
-// 	ft_memmove(str, str + 2, 3 * sizeof(char));
-// 	printf("New string: %s\n", str);
-
-// 	return (0);
-// }
+/*int	main(void)
+{
+	char	str1[20] = "Hello world!";
+	memcpy(&str1[2], &str1[1], 7);
+	printf("Result: %s\n", str1);
+	char	str2[20] = "Hello world!";
+	memmove(&str2[2], &str2[1], 7);
+	printf("Result: %s\n", str2);
+    char	str3[20] = "Hello world!";
+    ft_memmove(&str3[2], &str3[1], 7);
+    printf("Result: %s\n", str3);
+	return (0);
+}*/
