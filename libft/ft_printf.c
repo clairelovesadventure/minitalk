@@ -44,7 +44,7 @@ static int	print_format(char spcf, va_list args)
 	else if (spcf == 's')
 		return (print_str(va_arg(args, char *)));
 	else if (spcf == 'p')
-		return (print_ptr(va_arg(args, unsigned lo:whileng int)));
+		return (print_ptr(va_arg(args, unsigned long int)));
 	else if (spcf == 'd' || spcf == 'i')
 		return (print_digit(va_arg(args, int)));
 	else if (spcf == 'u')
